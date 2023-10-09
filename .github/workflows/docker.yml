@@ -1,0 +1,21 @@
+name: publish docker image
+on:
+    push:
+        branches:
+            - "master"
+jobs:
+    build:
+        if: github.repository_owner == 'smilerz'
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@master
+        # Build container
+          - name: Build and publish image
+            uses: ilteoood/docker_buildx@master
+            with:
+                publish: true
+                dockerFile: .docker/Dockerfile.debian
+                imageName: smilerz/node-red
+                platform: linux/amd64
+                dockerHubUser: ${{ secrets.USERNAME }}
+                dockerHubPassword: ${{ secrets.PASSWORD }}
