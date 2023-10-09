@@ -1,4 +1,6 @@
 #!/bin/bash
+source /opt/venv/bin/activate
+/menu/setup.sh
 
 trap stop SIGINT SIGTERM
 
