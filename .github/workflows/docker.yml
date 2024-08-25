@@ -49,20 +49,19 @@ jobs:
         run: |
           TAGS=""
 
-          echo Original tags ${{ steps.meta.outputs.tags }}
-
-          if [[ ! -z "${{ github.event.inputs.version }}" ]]; then
-            TRAVIS_TAG=${{ github.event.inputs.version }}
-          else
-            TRAVIS_TAG=$(echo $GITHUB_REF | awk -F '/' '{ print $3}')
-          fi
+          while IFS= read -r TAG;do
+            if [ -z  "$TAGS" ]; then
+              TAGS=$TAG
+            else
+              TAGS="$TAGS,$TAG"
+            fi
+          done <<< "${{ steps.meta.outputs.tags }}"
 
           echo $TAGS
-          echo "tags=$TAGS" >> $GITHUB_OUTPUT
-          echo "push=$PUSH" >> $GITHUB_OUTPUT
-          echo "buildVersion=$VERSION" >> $GITHUB_OUTPUT
 
-          cat $GITHUB_OUTPUT
+          echo "::set-output name=tags::$TAGS"
+          echo "::set-output name=version::$(echo $GITHUB_REF | awk -F '/' '{ print $3}')"
+          echo "::set-output name=buildVersion::$VERSION"
 
       - name: Build and push
         id: build-push
