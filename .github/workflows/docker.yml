@@ -12,7 +12,7 @@ jobs:
   build:
     env:
       # Setting the defaults up front
-      LATEST_NODE: 16
+      LATEST_NODE: 20
       DEFAULT_IMAGE: smilerz/node-red
 
     runs-on: ubuntu-latest
