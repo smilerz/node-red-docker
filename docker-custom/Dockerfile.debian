@@ -6,8 +6,8 @@ ARG OS=bullseye-slim
 FROM node:${NODE_VERSION}-${OS} AS base
 
 # Copy scripts
-COPY scripts/*.sh /tmp/
-COPY healthcheck.js /
+COPY .docker/scripts/*.sh /tmp/
+COPY .docker/healthcheck.js /
 
 # Install tools, create Node-RED app and data dir, add user and set rights
 RUN set -ex && \
