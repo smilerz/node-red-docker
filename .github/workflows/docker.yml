@@ -47,7 +47,7 @@ jobs:
       - name: Get Node-RED Version
         id: nrVersion
         run: |
-          TAGS=""
+          TAGS="latest"
 
           while IFS= read -r TAG;do
             if [ -z  "$TAGS" ]; then
@@ -79,4 +79,4 @@ jobs:
             BUILD_REF=${{ env.GITHUB.SHA }}
             NODE_RED_VERSION=${{ steps.nrVersion.outputs.version }}
             BUILD_VERSION=${{ steps.nrVersion.outputs.buildVersion }}
-          tags: "node-red:latest"
+          tags: "${{ steps.nrVersion.outputs.tags }}"
