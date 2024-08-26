@@ -1,3 +1,4 @@
+ARG ARCH=amd64
 ARG NODE_VERSION=20
 ARG OS=bullseye-slim
 
