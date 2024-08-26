@@ -82,7 +82,7 @@ RUN apt-get install -y build-essential
 RUN chown -R node-red:root /usr/src/node-red && \
     apt-get update && apt-get install -y python-dev-is-python3 libcairo2-dev python3.11-venv && \
     python3 -m venv /opt/venv/ && \
-    chown -R node-red:node-red /opt/venv && chown -R node-red:node-red /usr/share/fonts/truetype &&\
+    # /usr/share/fonts/truetype &&\
     /opt/venv/bin/python -m pip install --upgrade pip setuptools && \
     rm -r /tmp/*
 
