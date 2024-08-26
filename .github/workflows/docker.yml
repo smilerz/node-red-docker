@@ -79,4 +79,4 @@ jobs:
             BUILD_REF=${{ env.GITHUB.SHA }}
             NODE_RED_VERSION=${{ steps.nrVersion.outputs.version }}
             BUILD_VERSION=${{ steps.nrVersion.outputs.buildVersion }}
-          tags: "latest"
+          tags: "node-red:latest"
