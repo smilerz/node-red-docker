@@ -37,7 +37,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           flavor: |
-            latest=false
+            latest=true
           images: |
             ${{ env.DEFAULT_IMAGE }}
           tags: |
@@ -47,7 +47,7 @@ jobs:
       - name: Get Node-RED Version
         id: nrVersion
         run: |
-          TAGS="latest"
+          TAGS=""
 
           while IFS= read -r TAG;do
             if [ -z  "$TAGS" ]; then
