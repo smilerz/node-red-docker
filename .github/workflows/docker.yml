@@ -44,6 +44,25 @@ jobs:
             type=ref,event=branch
             type=semver,pattern={{version}}
 
+      - name: Get Node-RED Version
+        id: nrVersion
+        run: |
+          TAGS=""
+
+          while IFS= read -r TAG;do
+            if [ -z  "$TAGS" ]; then
+              TAGS=$TAG
+            else
+              TAGS="$TAGS,$TAG"
+            fi
+          done <<< "${{ steps.meta.outputs.tags }}"
+
+          echo $TAGS
+
+          echo "::set-output name=tags::$TAGS"
+          echo "::set-output name=version::$(echo $GITHUB_REF | awk -F '/' '{ print $3}')"
+          echo "::set-output name=buildVersion::$VERSION"
+
       - name: Build and push
         id: build-push
         uses: docker/build-push-action@v5
